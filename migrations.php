@@ -3,13 +3,12 @@
 use App\DataTypes;
 
 require_once 'vendor/autoload.php';
-$users = [
+$admins = [
     'id' => DataTypes::INTAUTO,
     'name' => DataTypes::STRINGNOTNULL,
     'email' => DataTypes::STRINGUNIQUENOTNULL,
     'password' => DataTypes::STRINGNOTNULL,
     'balance' => DataTypes::FLOATNOTNULL
-
 
 ];
 
@@ -20,5 +19,14 @@ $transactions = [
     'FOREIGN KEY(from_user_id)' => 'REFERENCES users(id)',
     'FOREIGN KEY(to_user_id)' => 'REFERENCES users(id)',
     'amount' => DataTypes::FLOATNOTNULL,
+
+];
+$users = [
+    'id' => DataTypes::INTAUTO,
+    'name' => DataTypes::STRINGNOTNULL,
+    'email' => DataTypes::STRINGUNIQUENOTNULL,
+    'password' => DataTypes::STRINGNOTNULL,
+
+
 
 ];

@@ -8,4 +8,7 @@ if (file_exists('migrations.php')) {
 }
 
 
-Database::makeTable(tablename: "transactions", array: $transactions);
+Database::makeTable(tablename: "admins", array: $admins);
+// $database = new Database();
+// var_dump($database->showTables(searchTerm: "posts"));
+//Database::dropTables(tablename: "admins");

@@ -38,5 +38,7 @@ require_once 'vendor/autoload.php';
 
 
 // ];
-$database = new Database();
-$database->makeTable(tablename: "users", array: $users);
+
+// Database::makeTable(tablename: "users", array: $users);
+// $databse = new Database();
+Database::dropTables("admins", $admins);
