@@ -101,7 +101,7 @@ class Registration
         $isValid = true;
 
         if (!filter_var($email, FILTER_VALIDATE_EMAIL) || strlen($password) < 8 || strlen($name) < 8 || $balance < 0) {
-            $this->formValidationMessage($email, $password, $name, $balance);
+            $this->formValidationMessage(email: $email, password: $password, name: $name, balance: $balance);
             $isValid = false;
         }
 

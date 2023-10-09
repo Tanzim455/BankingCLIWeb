@@ -62,16 +62,20 @@ if (isset($_POST['add_record'])) {
     $name = $_POST["name"];
     $email = $_POST["email"];
     $balance = $_POST["balance"];
-    $password = password_hash($_POST["password"], PASSWORD_DEFAULT);
+    $password = $_POST["password"];
 
 
     $registration = new Registration();
-    $validated = $registration->formValidation(name: $name, email: $email, password: $password, balance: $balance);
-
-
-
+    $validated = $registration->formValidationState(name: $name, email: $email, password: $password, balance: $balance);
+    $hashed_password = password_hash($password, PASSWORD_BCRYPT);
 
     if (!$validated) {
+        echo "Dont execute the query";
+    }
+    if ($validated) {
+        echo "Execiute the query";
+    }
+    if ($validated) {
         echo "execute the query";
         $stmt = insert(array: $columns, tableName: "users");
         var_dump($stmt);
@@ -79,7 +83,7 @@ if (isset($_POST['add_record'])) {
             //         # code...
             // var_dump(":$columns[$i]", $_POST[$columns[$i]]) . PHP_EOL;
             if ($columns[$i] === 'password') {
-                $stmt->bindParam(":$columns[$i]", $password) . PHP_EOL;
+                $stmt->bindParam(":$columns[$i]", $hashed_password) . PHP_EOL;
             }
             if ($columns[$i] !== 'password') {
                 $stmt->bindParam(":$columns[$i]", $_POST[$columns[$i]]) . PHP_EOL;
