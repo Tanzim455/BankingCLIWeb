@@ -67,27 +67,26 @@ if (isset($_POST['add_record'])) {
 
     $registration = new Registration();
     $validated = $registration->formValidation(name: $name, email: $email, password: $password, balance: $balance);
-    if ($validated) {
-        echo "Dont execute the query";
-    }
+
+
 
 
     if (!$validated) {
         echo "execute the query";
         $stmt = insert(array: $columns, tableName: "users");
         var_dump($stmt);
-        // for ($i = 0; $i <= count($columns) - 1; $i++) {
-        //     //         # code...
-        //     // var_dump(":$columns[$i]", $_POST[$columns[$i]]) . PHP_EOL;
-        //     if ($columns[$i] === 'password') {
-        //         $stmt->bindParam(":$columns[$i]", $password) . PHP_EOL;
-        //     }
-        //     if ($columns[$i] !== 'password') {
-        //         $stmt->bindParam(":$columns[$i]", $_POST[$columns[$i]]) . PHP_EOL;
-        //     }
-        //     //$stmt->bindParam(":$columns[$i]", $_POST[$columns[$i]]) . PHP_EOL;
-        // }
-        // $stmt->execute();
+        for ($i = 0; $i <= count($columns) - 1; $i++) {
+            //         # code...
+            // var_dump(":$columns[$i]", $_POST[$columns[$i]]) . PHP_EOL;
+            if ($columns[$i] === 'password') {
+                $stmt->bindParam(":$columns[$i]", $password) . PHP_EOL;
+            }
+            if ($columns[$i] !== 'password') {
+                $stmt->bindParam(":$columns[$i]", $_POST[$columns[$i]]) . PHP_EOL;
+            }
+            //$stmt->bindParam(":$columns[$i]", $_POST[$columns[$i]]) . PHP_EOL;
+        }
+        $stmt->execute();
     }
 }
 

@@ -26,6 +26,4 @@ $users = [
     'password' => DataTypes::STRINGNOTNULL,
     'balance' => DataTypes::FLOATNOTNULL
 
-
-
 ];

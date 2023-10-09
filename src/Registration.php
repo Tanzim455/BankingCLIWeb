@@ -24,20 +24,24 @@ class Registration
 
     public function formValidation(string $email, string $password, string $name, float $balance): bool
     {
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            echo "It is not an appropriate email address" . PHP_EOL;
-        }
-        if (strlen($password) < 8) {
-            echo "Your password count needs to be greater or equal to 8" . PHP_EOL;
-        }
+        $formState = $this->formValidationState(email: $email, password: $password, name: $name, balance: $balance);
+        if ($formState) {
+            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
 
-        if (strlen($name) < 8) {
-            echo "Your name must be at least 8 characters" . PHP_EOL;
+                echo "It is not an appropriate email address" . PHP_EOL;
+            }
+            if (strlen($password) < 8) {
+                echo "Your password count needs to be greater or equal to 8" . PHP_EOL;
+            }
+
+            if (strlen($name) < 8) {
+                echo "Your name must be at least 8 characters" . PHP_EOL;
+            }
+            if ($balance < 0) {
+                echo  "Your balance cannot be negative";
+            }
         }
-        if ($balance < 0) {
-            echo  "Your balance cannot be negative";
-        }
-        return true;
+        return false;
     }
     public function register(
         string $email,
@@ -65,5 +69,42 @@ class Registration
 
             $this->write(array: $array, file: $file, filePath: $phpFilePath, variableName: "users");
         }
+    }
+    public function formValidationMessage(string $email, string $password, string $name, float $balance): bool
+    {
+        $valid = true; // Assume the input is valid initially
+
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            echo "It is not an appropriate email address" . PHP_EOL;
+            $valid = false;
+        }
+        if (strlen($password) < 8) {
+            echo "Your password count needs to be greater or equal to 8" . PHP_EOL;
+            $valid = false;
+        }
+
+        if (strlen($name) < 8) {
+            echo "Your name must be at least 8 characters" . PHP_EOL;
+            $valid = false;
+        }
+        if ($balance < 0) {
+            echo  "Your balance cannot be negative" . PHP_EOL;
+            $valid = false;
+        }
+
+        // If input is valid, return true, else return false
+        return $valid;
+    }
+
+    public function formValidationState(string $email, string $password, string $name, float $balance): bool
+    {
+        $isValid = true;
+
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL) || strlen($password) < 8 || strlen($name) < 8 || $balance < 0) {
+            $this->formValidationMessage($email, $password, $name, $balance);
+            $isValid = false;
+        }
+
+        return $isValid;
     }
 }
