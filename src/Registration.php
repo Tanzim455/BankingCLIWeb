@@ -4,9 +4,34 @@ declare(strict_types=1);
 
 namespace App;
 
+use App\Web\Database;
+use PDO;
+
 class Registration
 {
     use FileWriting;
+    public function checkUserEmailExistsinDatabase(string $email, string $tableName): bool
+    {
+        $database = new Database();
+        $pdo = $database->run();
+        $valid = true;
+        $sql = "SELECT email FROM $tableName WHERE email='$email'";
+        $stmt = $pdo->query($sql);
+
+        if ($stmt) {
+            $emails = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            if (count($emails)) {
+                $valid = true;
+                //return true
+                echo "Sorry the email already exists";
+            }
+            if (!count($emails)) {
+                $valid = false;
+            }
+            return $valid;
+        }
+    }
     public static function checkUserEmailExists($array, string $email): bool
     {
 
@@ -92,6 +117,8 @@ class Registration
             $valid = false;
         }
 
+
+
         // If input is valid, return true, else return false
         return $valid;
     }
@@ -100,7 +127,10 @@ class Registration
     {
         $isValid = true;
 
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL) || strlen($password) < 8 || strlen($name) < 8 || $balance < 0) {
+        if (
+            !filter_var($email, FILTER_VALIDATE_EMAIL) || strlen($password) < 8 || strlen($name) < 8 || $balance < 0
+
+        ) {
             $this->formValidationMessage(email: $email, password: $password, name: $name, balance: $balance);
             $isValid = false;
         }

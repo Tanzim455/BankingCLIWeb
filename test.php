@@ -64,26 +64,36 @@ if (isset($_POST['add_record'])) {
     $balance = $_POST["balance"];
     $password = $_POST["password"];
 
+    // if (!is_numeric($balance)) {
+    //     echo "Sorry the balance must be numeric";
+    // }
+
+
+
+
 
     $registration = new Registration();
     $validated = $registration->formValidationState(name: $name, email: $email, password: $password, balance: $balance);
     $hashed_password = password_hash($password, PASSWORD_BCRYPT);
+    //convert balance to float
+    $float_val = floatval($balance);
 
-    if (!$validated) {
-        echo "Dont execute the query";
-    }
-    if ($validated) {
-        echo "Execiute the query";
-    }
-    if ($validated) {
+    $check_email_exists = $registration->checkUserEmailExistsinDatabase(email: $email, tableName: "users");
+
+
+
+    if ($validated && !$check_email_exists) {
         echo "execute the query";
         $stmt = insert(array: $columns, tableName: "users");
-        var_dump($stmt);
+
         for ($i = 0; $i <= count($columns) - 1; $i++) {
             //         # code...
             // var_dump(":$columns[$i]", $_POST[$columns[$i]]) . PHP_EOL;
             if ($columns[$i] === 'password') {
                 $stmt->bindParam(":$columns[$i]", $hashed_password) . PHP_EOL;
+            }
+            if ($columns[$i] == 'balance') {
+                $stmt->bindParam(":$columns[$i]", $float_val) . PHP_EOL;
             }
             if ($columns[$i] !== 'password') {
                 $stmt->bindParam(":$columns[$i]", $_POST[$columns[$i]]) . PHP_EOL;
