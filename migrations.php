@@ -14,10 +14,8 @@ $admins = [
 
 $transactions = [
     'id' => DataTypes::INTAUTO,
-    'from_user_id' => DataTypes::INT,
-    'to_user_id' => DataTypes::INT,
-    'FOREIGN KEY(from_user_id)' => 'REFERENCES users(id)',
-    'FOREIGN KEY(to_user_id)' => 'REFERENCES users(id)',
+    'from_user' => DataTypes::STRINGNOTNULL,
+    'to_user' => DataTypes::STRINGNOTNULL,
     'amount' => DataTypes::FLOATNOTNULL,
 
 ];
@@ -26,6 +24,7 @@ $users = [
     'name' => DataTypes::STRINGNOTNULL,
     'email' => DataTypes::STRINGUNIQUENOTNULL,
     'password' => DataTypes::STRINGNOTNULL,
+    'balance' => DataTypes::FLOATNOTNULL
 
 
 

@@ -1,6 +1,8 @@
 <?php
 
-use App\Database;
+
+use App\Registration;
+use App\Web\Database;
 
 require_once 'vendor/autoload.php';
 // $storageType = php_sapi_name() === 'cli' ? 'cli' : 'web'; // Determine the storage type
@@ -22,6 +24,7 @@ function insert(string $tableName, array $array)
     $implode = implode(",", $array);
     $arrayValues = '';
     $count = count($array) - 1;
+
     for ($i = 0; $i <= count($array) - 1; $i++) {
 
         if ($i == $count) {
@@ -34,30 +37,65 @@ function insert(string $tableName, array $array)
     $stmt = $pdo->prepare("INSERT INTO $tableName ($implode) VALUES ($arrayValues)");
     return $stmt;
 }
+// if (isset($_POST['add_record'])) {
+
+//     $columns = ['name', 'email', 'password', 'balance'];
+//     $stmt = insert(array: $columns, tableName: "users");
+//     // var_dump($sql);
+//     //Prepare Query for Execution
+//     // var_dump($stmt);
+
+//     for ($i = 0; $i <= count($columns) - 1; $i++) {
+//         # code...
+//         $stmt->bindParam(":$columns[$i]", $_POST[$columns[$i]]) . PHP_EOL;
+//     }
+//     // Query Execution
+//     $stmt->execute();
+// }
+
+
+
+//         # code...
 if (isset($_POST['add_record'])) {
-
     $columns = ['name', 'email', 'password', 'balance'];
-    $stmt = insert(array: $columns, tableName: "users");
-    // var_dump($sql);
-    //Prepare Query for Execution
-    var_dump($stmt);
+    // echo " $columns[$i] " . ' => '  . $_POST[$columns[$i]];
+    $name = $_POST["name"];
+    $email = $_POST["email"];
+    $balance = $_POST["balance"];
+    $password = password_hash($_POST["password"], PASSWORD_DEFAULT);
 
-    for ($i = 0; $i <= count($columns) - 1; $i++) {
-        # code...
-        $stmt->bindParam(":$columns[$i]", $_POST[$columns[$i]]) . PHP_EOL;
+
+    $registration = new Registration();
+    $validated = $registration->formValidation(name: $name, email: $email, password: $password, balance: $balance);
+    if ($validated) {
+        echo "Dont execute the query";
     }
-    // Query Execution
-    $stmt->execute();
-}
-?>
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
+
+    if (!$validated) {
+        echo "execute the query";
+        $stmt = insert(array: $columns, tableName: "users");
+        var_dump($stmt);
+        // for ($i = 0; $i <= count($columns) - 1; $i++) {
+        //     //         # code...
+        //     // var_dump(":$columns[$i]", $_POST[$columns[$i]]) . PHP_EOL;
+        //     if ($columns[$i] === 'password') {
+        //         $stmt->bindParam(":$columns[$i]", $password) . PHP_EOL;
+        //     }
+        //     if ($columns[$i] !== 'password') {
+        //         $stmt->bindParam(":$columns[$i]", $_POST[$columns[$i]]) . PHP_EOL;
+        //     }
+        //     //$stmt->bindParam(":$columns[$i]", $_POST[$columns[$i]]) . PHP_EOL;
+        // }
+        // $stmt->execute();
+    }
+}
+
+?>
+
+
+
+
 
 <body>
     <form name="frmAdd" action="" method="POST">
@@ -82,5 +120,3 @@ if (isset($_POST['add_record'])) {
         </div>
     </form>
 </body>
-
-</html>

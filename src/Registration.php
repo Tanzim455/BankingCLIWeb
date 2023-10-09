@@ -22,7 +22,7 @@ class Registration
         }
     }
 
-    public function formValidation(string $email, string $password, string $name, float $balance): void
+    public function formValidation(string $email, string $password, string $name, float $balance): bool
     {
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             echo "It is not an appropriate email address" . PHP_EOL;
@@ -37,6 +37,7 @@ class Registration
         if ($balance < 0) {
             echo  "Your balance cannot be negative";
         }
+        return true;
     }
     public function register(
         string $email,
