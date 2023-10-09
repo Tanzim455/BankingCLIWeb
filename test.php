@@ -76,7 +76,7 @@ if (isset($_POST['add_record'])) {
     $validated = $registration->formValidationState(name: $name, email: $email, password: $password, balance: $balance);
     $hashed_password = password_hash($password, PASSWORD_BCRYPT);
     //convert balance to float
-    $float_val = floatval($balance);
+
 
     $check_email_exists = $registration->checkUserEmailExistsinDatabase(email: $email, tableName: "users");
 
@@ -92,9 +92,7 @@ if (isset($_POST['add_record'])) {
             if ($columns[$i] === 'password') {
                 $stmt->bindParam(":$columns[$i]", $hashed_password) . PHP_EOL;
             }
-            if ($columns[$i] == 'balance') {
-                $stmt->bindParam(":$columns[$i]", $float_val) . PHP_EOL;
-            }
+
             if ($columns[$i] !== 'password') {
                 $stmt->bindParam(":$columns[$i]", $_POST[$columns[$i]]) . PHP_EOL;
             }

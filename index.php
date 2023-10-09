@@ -6,19 +6,19 @@ use App\DataTypes;
 require_once 'vendor/autoload.php';
 
 
-// use App\App;
-// use App\Login;
-// use App\Registration;
-// use App\Transaction;
+use App\App;
+use App\Login;
+use App\Registration;
+use App\Transaction;
 
-// $registration = new Registration();
-// $login = new Login();
-// $transaction = new Transaction();
-// $app = new App();
+$registration = new Registration();
+$login = new Login();
+$transaction = new Transaction();
+$app = new App();
 
 
-// // $app->main();
-// $app->main($registration, $login, $transaction);
+
+$app->main($registration, $login, $transaction);
 // $database = new Database();
 // $database->run();
 // $isCLI = php_sapi_name();

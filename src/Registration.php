@@ -80,10 +80,13 @@ class Registration
 
     ): void {
         $this->formValidation(email: $email, password: $password, name: $name, balance: $balance);
+        $checkState = $this->formValidationState(email: $email, password: $password, name: $name, balance: $balance);
+        // var_dump($this->formValidationState(email: $email, password: $password, name: $name, balance: $balance));
+        var_dump($checkState);
+
         if (
-            filter_var($email, FILTER_VALIDATE_EMAIL) && !$check_email_exists
-            && strlen($name) >= 8 && strlen($password) >= 8
-            && $balance > 0
+            $checkState && !$check_email_exists
+
         ) {
             $hashed_password = password_hash($password, PASSWORD_BCRYPT);
             $values = [$name, $email, $hashed_password, $balance];
