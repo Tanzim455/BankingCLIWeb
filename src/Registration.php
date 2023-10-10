@@ -20,13 +20,7 @@ class Registration
 
         if ($stmt) {
             $rowCount = $stmt->rowCount();
-            // if ($rowCount) {
-            //     echo "It matches";
-            // }
-            // if (!$rowCount) {
-            //     echo "It does not match";
-            // }
-            // $emails = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
 
             if ($rowCount && $type == "Registration") {
                 $valid = true;

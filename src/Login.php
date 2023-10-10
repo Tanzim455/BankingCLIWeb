@@ -33,7 +33,7 @@ class Login
             }
         }
     }
-    public function viewBalance($filtered_email): float|bool
+    public function viewBalance(array $filtered_email, ?string $name): float|bool
     {
         if ($filtered_email) {
             ['balance' => $balance] = $this->flattenArray(filtered_email: $filtered_email);

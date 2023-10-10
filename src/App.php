@@ -68,7 +68,7 @@ class App
                         echo "The email does not exist in database \n";
                     } else {
                         $result = $login->login(filtered_email: $filtered_email, inputpassword: $this->password);
-                        $balance = $login->viewBalance(filtered_email: $filtered_email);
+                        $balance = $login->viewBalance(filtered_email: $filtered_email, name: NULL);
                         ['email' => $authuseremail] = $login->flattenArray(filtered_email: $filtered_email);
                     }
 
