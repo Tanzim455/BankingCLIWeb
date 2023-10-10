@@ -19,22 +19,29 @@ class Registration
         $stmt = $pdo->query($sql);
 
         if ($stmt) {
-            $emails = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $rowCount = $stmt->rowCount();
+            // if ($rowCount) {
+            //     echo "It matches";
+            // }
+            // if (!$rowCount) {
+            //     echo "It does not match";
+            // }
+            // $emails = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-            if (count($emails) && $type == "Registration") {
+            if ($rowCount && $type == "Registration") {
                 $valid = true;
                 //return true
                 echo "Sorry the email already exists";
             }
-            if (!count($emails) && $type == "Registration") {
+            if (!$rowCount && $type == "Registration") {
                 $valid = false;
             }
-            if (count($emails) && $type == "Login") {
+            if ($rowCount && $type == "Login") {
                 $valid = true;
                 //return true
 
             }
-            if (!count($emails) && $type == "Login") {
+            if (!$rowCount && $type == "Login") {
                 $valid = false;
                 echo "Sorry the email does not exist";
             }

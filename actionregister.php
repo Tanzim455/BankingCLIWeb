@@ -34,7 +34,7 @@ if (isset($_POST['add_record'])) {
     // $check_email_exists = $registration->checkUserEmailExistsinDatabase(email: $email, tableName: "users", type: "registration");
     //Check email exists for login
     $check_email_exists = $registration->checkUserEmailExistsinDatabase(email: $email, tableName: "users", type: "Registration");
-
+    var_dump($check_email_exists);
 
     if ($validated && !$check_email_exists) {
         echo "execute the query";
