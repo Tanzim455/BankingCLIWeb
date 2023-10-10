@@ -102,4 +102,36 @@ class Database
             echo "The table already exists";
         }
     }
+    public function insert(string $tableName, array $array, ?string $password)
+    {
+
+        $pdo = $this->run();
+        $implode = implode(",", $array);
+        $arrayValues = '';
+        $count = count($array) - 1;
+
+        for ($i = 0; $i <= count($array) - 1; $i++) {
+
+            if ($i == $count) {
+                $arrayValues .= ":$array[$i]";
+            }
+            if ($i !== $count) {
+                $arrayValues .= ":$array[$i],";
+            }
+        }
+        $stmt = $pdo->prepare("INSERT INTO $tableName ($implode) VALUES ($arrayValues)");
+        for ($i = 0; $i <= count($array) - 1; $i++) {
+            //         # code...
+            // var_dump(":$columns[$i]", $_POST[$columns[$i]]) . PHP_EOL;
+            if ($array[$i] === 'password') {
+                $stmt->bindParam(":$array[$i]", $password) . PHP_EOL;
+            }
+
+            if ($array[$i] !== 'password') {
+                $stmt->bindParam(":$array[$i]", $_POST[$array[$i]]) . PHP_EOL;
+            }
+            //$stmt->bindParam(":$columns[$i]", $_POST[$columns[$i]]) . PHP_EOL;
+        }
+        $stmt->execute();
+    }
 }
