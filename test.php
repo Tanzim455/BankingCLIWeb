@@ -5,19 +5,9 @@ use App\Registration;
 use App\Web\Database;
 
 require_once 'vendor/autoload.php';
-// $storageType = php_sapi_name() === 'cli' ? 'cli' : 'web'; // Determine the storage type
-
-// var_dump($storageType);
-
-// $record = [];
-// $record["email"] = "tanzim67@gmail.com";
-// $record["password"] = "password";
-// $record["name"] = "Tanzim Ibthesam";
-// $record["balance"] = 300;
-// // var_dump($record);
 
 
-function insert(string $tableName, array $array)
+function insert(string $tableName, array $array, ?string $password)
 {
     $database = new Database();
     $pdo = $database->run();
@@ -35,23 +25,21 @@ function insert(string $tableName, array $array)
         }
     }
     $stmt = $pdo->prepare("INSERT INTO $tableName ($implode) VALUES ($arrayValues)");
-    return $stmt;
+    for ($i = 0; $i <= count($array) - 1; $i++) {
+        //         # code...
+        // var_dump(":$columns[$i]", $_POST[$columns[$i]]) . PHP_EOL;
+        if ($array[$i] === 'password') {
+            $stmt->bindParam(":$array[$i]", $password) . PHP_EOL;
+        }
+
+        if ($array[$i] !== 'password') {
+            $stmt->bindParam(":$array[$i]", $_POST[$array[$i]]) . PHP_EOL;
+        }
+        //$stmt->bindParam(":$columns[$i]", $_POST[$columns[$i]]) . PHP_EOL;
+    }
+    $stmt->execute();
 }
-// if (isset($_POST['add_record'])) {
 
-//     $columns = ['name', 'email', 'password', 'balance'];
-//     $stmt = insert(array: $columns, tableName: "users");
-//     // var_dump($sql);
-//     //Prepare Query for Execution
-//     // var_dump($stmt);
-
-//     for ($i = 0; $i <= count($columns) - 1; $i++) {
-//         # code...
-//         $stmt->bindParam(":$columns[$i]", $_POST[$columns[$i]]) . PHP_EOL;
-//     }
-//     // Query Execution
-//     $stmt->execute();
-// }
 
 
 
@@ -78,27 +66,14 @@ if (isset($_POST['add_record'])) {
     //convert balance to float
 
 
-    $check_email_exists = $registration->checkUserEmailExistsinDatabase(email: $email, tableName: "users");
-
+    // $check_email_exists = $registration->checkUserEmailExistsinDatabase(email: $email, tableName: "users", type: "registration");
+    //Check email exists for login
+    $check_email_exists = $registration->checkUserEmailExistsinDatabase(email: $email, tableName: "users", type: "Registration");
 
 
     if ($validated && !$check_email_exists) {
         echo "execute the query";
-        $stmt = insert(array: $columns, tableName: "users");
-
-        for ($i = 0; $i <= count($columns) - 1; $i++) {
-            //         # code...
-            // var_dump(":$columns[$i]", $_POST[$columns[$i]]) . PHP_EOL;
-            if ($columns[$i] === 'password') {
-                $stmt->bindParam(":$columns[$i]", $hashed_password) . PHP_EOL;
-            }
-
-            if ($columns[$i] !== 'password') {
-                $stmt->bindParam(":$columns[$i]", $_POST[$columns[$i]]) . PHP_EOL;
-            }
-            //$stmt->bindParam(":$columns[$i]", $_POST[$columns[$i]]) . PHP_EOL;
-        }
-        $stmt->execute();
+        $stmt = insert(array: $columns, tableName: "users", password: $hashed_password);
     }
 }
 

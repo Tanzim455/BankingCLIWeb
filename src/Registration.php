@@ -10,7 +10,7 @@ use PDO;
 class Registration
 {
     use FileWriting;
-    public function checkUserEmailExistsinDatabase(string $email, string $tableName): bool
+    public function checkUserEmailExistsinDatabase(string $email, string $tableName, string $type): bool
     {
         $database = new Database();
         $pdo = $database->run();
@@ -21,13 +21,22 @@ class Registration
         if ($stmt) {
             $emails = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-            if (count($emails)) {
+            if (count($emails) && $type == "Registration") {
                 $valid = true;
                 //return true
                 echo "Sorry the email already exists";
             }
-            if (!count($emails)) {
+            if (!count($emails) && $type == "Registration") {
                 $valid = false;
+            }
+            if (count($emails) && $type == "Login") {
+                $valid = true;
+                //return true
+
+            }
+            if (!count($emails) && $type == "Login") {
+                $valid = false;
+                echo "Sorry the email does not exist";
             }
             return $valid;
         }
