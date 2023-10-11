@@ -1,15 +1,12 @@
 <?php
+
+use App\Web\Redirect;
+
 include './actionlogin.php';
-// session_start();
-// if (isset($_SESSION["email"])) {
-//     echo "user is logged in";
-// } else {
-//     header("location:login.php");
-// }
-var_dump(isset($_SESSION["email"]));
-if (isset($_SESSION["email"])) {
-    header("location:home.php");
-}
+require_once './vendor/autoload.php';
+
+Redirect::ifAuthenticated(sessionname: "email", location: "location:home.php");
+
 
 ?>
 

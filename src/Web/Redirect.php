@@ -8,12 +8,18 @@ class Redirect
 {
     public string $sessionname;
     public string $location;
-    public static function To(string $sessionname, string $location)
+    public static function ifAuthenticated(string $sessionname, string $location)
     {
 
         if (isset($_SESSION[$sessionname])) {
             header($location);
-            exit;
+        }
+    }
+    public static function ifNotAuthenticated(string $sessionname, string $location)
+    {
+
+        if (!isset($_SESSION[$sessionname])) {
+            header($location);
         }
     }
 }
