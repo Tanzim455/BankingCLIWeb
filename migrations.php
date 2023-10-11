@@ -14,9 +14,10 @@ $admins = [
 
 $transactions = [
     'id' => DataTypes::INTAUTO,
-    'from_user' => DataTypes::STRINGNOTNULL,
-    'to_user' => DataTypes::STRINGNOTNULL,
+    'receiver_name' => DataTypes::STRINGNOTNULL,
+    'receiver_email' => DataTypes::STRINGNOTNULL,
     'amount' => DataTypes::FLOATNOTNULL,
+    'date' => DataTypes::TIMESTAMPNOTNULLABLE
 
 ];
 $users = [

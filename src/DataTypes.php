@@ -17,4 +17,6 @@ class DataTypes
     const INT = "INT";
     const PRIMARYKEY = "PRIMARY KEY";
     const  FLOAT = "FLOAT";
+    const TIMESTAMP = "TIMESTAMP";
+    const TIMESTAMPNOTNULLABLE = DataTypes::TIMESTAMP . ' ' . DataTypes::NOTNULL;
 }
