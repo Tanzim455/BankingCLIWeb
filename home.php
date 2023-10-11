@@ -7,11 +7,8 @@ use App\Web\Redirect;
 
 require_once './vendor/autoload.php';
 session_start();
-if (!isset($_SESSION["email"])) {
-    header("location:login.php");
-    exit;
-}
-// Redirect::To(sessionname: "email", location: "location:login.php");
+
+Redirect::To(sessionname: "email", location: "location:login.php");
 // echo $_SESSION["email"] . PHP_EOL;
 // echo $_SESSION["balance"] . PHP_EOL;
 // echo $_SESSION["name"] . PHP_EOL;
