@@ -1,6 +1,12 @@
 <?php
-
 include './actionlogin.php';
+
+use App\Web\Redirect;
+
+require_once './vendor/autoload.php';
+
+
+Redirect::To(sessionname: "email", location: "location:home.php");
 
 ?>
 
