@@ -30,9 +30,28 @@ $pdo = $database->run();
 // $stmt->execute();
 $sql = "SELECT date FROM transactions WHERE id=3";
 $stmt = $pdo->query($sql)->fetch(PDO::FETCH_ASSOC);
+var_dump($stmt);
 ['date' => $date] = $stmt;
 echo $date;
-//Convert this date to 
-$date_create = date_create($date);
-//check date create
-var_dump($date_create->format('d M Y h:i:A'));
+// //Convert this date to 
+// $date_create = date_create($date);
+// //check date create
+// var_dump($date_create->format('d M Y h:i:A'));
+
+try {
+    //code...
+    $pdo->beginTransaction();
+
+    $sql = " INSERT INTO transactions (receiver_name, receiver_email, amount, date)
+    VALUES ('Tanzim Ibthesam', 'tanzim67@gmail.com', 2000, now());";
+    $stmt = $pdo->query($sql);
+    $stmt->execute();
+    $sql2 = "UPDATE users SET balance =9000  WHERE email='tanzim67@gmail.com'";
+    $stmt2 = $pdo->query($sql2);
+    $stmt2->execute();
+    $pdo->commit();
+} catch (\Throwable $th) {
+    //throw $th;
+    $pdo->rollBack();
+    echo "Transaction failed: " . $th->getMessage();
+}
