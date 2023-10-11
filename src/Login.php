@@ -33,12 +33,17 @@ class Login
             }
         }
     }
-    public function viewBalance(array $filtered_email, ?string $name): float|bool
+    function viewBalanceorName(array $filtered_email, string $option): float|bool|string
     {
-        if ($filtered_email) {
+        if ($filtered_email && $option === 'balance') {
             ['balance' => $balance] = $this->flattenArray(filtered_email: $filtered_email);
 
             return $balance;
+        }
+        if ($filtered_email && $option === 'name') {
+            ['name' => $name] = $this->flattenArray(filtered_email: $filtered_email);
+
+            return $name;
         }
         return false;
     }
