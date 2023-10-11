@@ -41,7 +41,7 @@ if (isset($_POST['add_record'])) {
             var_dump($email) . PHP_EOL;
             $balance = $login->viewBalanceorName(filtered_email: $result, option: 'balance');
             $name = $login->viewBalanceorName(filtered_email: $result, option: 'name');
-            $_SESSION["balance"] = $balance;
+
             $_SESSION["name"] = $name;
             header("location:home.php");
         }

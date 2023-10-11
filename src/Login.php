@@ -33,7 +33,7 @@ class Login
             }
         }
     }
-    function viewBalanceorName(array $filtered_email, string $option): float|bool|string
+    public function viewBalanceorName(array $filtered_email, string $option): float|bool|string
     {
         if ($filtered_email && $option === 'balance') {
             ['balance' => $balance] = $this->flattenArray(filtered_email: $filtered_email);
@@ -47,7 +47,7 @@ class Login
         }
         return false;
     }
-    function checkEmailExists(array $array, string $email): bool
+    public function checkEmailExists(array $array, string $email): bool
     {
         $check_email_exsist = array_filter($array, fn ($u) => $u['email'] == $email);
         if ($check_email_exsist) {

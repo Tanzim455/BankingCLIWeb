@@ -24,7 +24,7 @@ class Transaction
         $this->write(array: $array, file: $file, filePath: $transactionFilePath, variableName: "transactions");
     }
 
-    public function amountBalanceValidation(float $balance, float $amount): void
+    public function amountBalanceValidation(?float $balance, float $amount): void
     {
         if ($amount > $balance) {
             echo "Sorry the amount is greater than your balance \n";

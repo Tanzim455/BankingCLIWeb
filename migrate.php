@@ -42,11 +42,11 @@ try {
     //code...
     $pdo->beginTransaction();
 
-    $sql = " INSERT INTO transactions (receiver_name, receiver_email, amount, date)
-    VALUES ('Tanzim Ibthesam', 'tanzim67@gmail.com', 2000, now());";
+    $sql = 'INSERT INTO transactions (receiver_name, receiver_email, amount, date)
+    VALUES ("Tanzim Ibthesam", "tanzim67@gmail.com", 2000, now());';
     $stmt = $pdo->query($sql);
     $stmt->execute();
-    $sql2 = "UPDATE users SET balance =9000  WHERE email='tanzim67@gmail.com'";
+    $sql2 = 'UPDATE users SET balance =11000  WHERE email="tanzim67@gmail.com"';
     $stmt2 = $pdo->query($sql2);
     $stmt2->execute();
     $pdo->commit();
