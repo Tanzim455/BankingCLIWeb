@@ -45,11 +45,5 @@ if (isset($_POST['add_record'])) {
             $_SESSION["name"] = $name;
             header("location:home.php");
         }
-        if (!$isLoggedIn) {
-            if (!isset($_SESSION['email'])) {
-                header("location:login.php");
-                exit;
-            }
-        }
     }
 }

@@ -1,9 +1,15 @@
 <?php
 include './actionlogin.php';
-
-
-
-
+// session_start();
+// if (isset($_SESSION["email"])) {
+//     echo "user is logged in";
+// } else {
+//     header("location:login.php");
+// }
+var_dump(isset($_SESSION["email"]));
+if (isset($_SESSION["email"])) {
+    header("location:home.php");
+}
 
 ?>
 

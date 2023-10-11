@@ -10,10 +10,7 @@ class Redirect
     public string $location;
     public static function To(string $sessionname, string $location)
     {
-        if (!isset($_SESSION[$sessionname])) {
-            header($location);
-            exit;
-        }
+
         if (isset($_SESSION[$sessionname])) {
             header($location);
             exit;
