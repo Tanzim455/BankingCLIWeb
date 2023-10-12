@@ -14,6 +14,7 @@ if (isset($_POST['add_record'])) {
     $pdo = $database->run();
     $receiver_name = $_SESSION["name"];
     $receiver_email = $_SESSION["email"];
+    $type = "Withdraw";
     $withdraw = $_POST["withdraw"];
     $sql = "SELECT balance FROM users WHERE email = :receiver_email";
     $statement = $pdo->prepare($sql);
@@ -36,8 +37,8 @@ if (isset($_POST['add_record'])) {
             $pdo->beginTransaction();
 
             // INSERT INTO transactions query
-            $sql1 = 'INSERT INTO transactions (receiver_name, receiver_email, amount, date)
-                     VALUES (:receiver_name, :receiver_email, :withdraw, NOW())';
+            $sql1 = 'INSERT INTO transactions (receiver_name, receiver_email, amount,type, date)
+            VALUES (:receiver_name, :receiver_email, :withdraw,:type, NOW())';
 
             $stmt1 = $pdo->prepare($sql1);
 
@@ -45,6 +46,7 @@ if (isset($_POST['add_record'])) {
             $stmt1->bindParam(':receiver_name', $receiver_name);
             $stmt1->bindParam(':receiver_email', $receiver_email);
             $stmt1->bindParam(':withdraw', $withdraw);
+            $stmt1->bindParam(':type', $type);
 
             $stmt1->execute();  // Execute the first query
 

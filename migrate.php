@@ -56,8 +56,8 @@ if (file_exists('migrations.php')) {
 //     echo "Transaction failed: " . $th->getMessage();
 // }
 
-Database::dropTables("users");
-Database::dropTables("transactions");
+// Database::dropTables("users");
+// Database::dropTables("transactions");
 
 Database::makeTable("users", $users);
 Database::makeTable("transactions", $transactions);
