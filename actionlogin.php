@@ -38,7 +38,7 @@ if (isset($_POST['add_record'])) {
         $isLoggedIn = $login->login(filtered_email: $result, inputpassword: $password);
         if ($isLoggedIn) {
             $_SESSION["email"] = $email;
-            var_dump($email) . PHP_EOL;
+
             $balance = $login->viewBalanceorName(filtered_email: $result, option: 'balance');
             $name = $login->viewBalanceorName(filtered_email: $result, option: 'name');
 

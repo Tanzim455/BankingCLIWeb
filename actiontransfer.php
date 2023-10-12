@@ -5,9 +5,9 @@
 session_start();
 require_once './vendor/autoload.php';
 
-use App\Login;
+
 use App\Registration;
-use App\Transaction;
+
 use App\Web\Database;
 
 if (isset($_POST['add_record'])) {
