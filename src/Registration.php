@@ -20,7 +20,7 @@ class Registration
 
         if ($stmt) {
             $rowCount = $stmt->rowCount();
-
+            var_dump($rowCount);
 
             if ($rowCount && $type == "Registration") {
                 $valid = true;
