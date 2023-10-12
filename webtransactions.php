@@ -17,6 +17,6 @@ foreach ($result as $arr) {
         $date_create = date_create($date);
         echo $date_create->format('d M Y h:i:A');
     }
-    echo "From " . $from . "\n";
-    echo "To: " . $to . "\n";
+    echo "Reciever email " . $to . "\n";
+    echo "Receiver Name" . $from . "\n";
 }

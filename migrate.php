@@ -57,7 +57,7 @@ if (file_exists('migrations.php')) {
 // }
 
 // Database::dropTables("users");
-// Database::dropTables("transactions");
+Database::dropTables("transactions");
 
-Database::makeTable("users", $users);
+// Database::makeTable("users", $users);
 Database::makeTable("transactions", $transactions);

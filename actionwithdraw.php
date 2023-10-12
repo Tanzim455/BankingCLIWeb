@@ -36,17 +36,17 @@ if (isset($_POST['add_record'])) {
         try {
             $pdo->beginTransaction();
 
-            // INSERT INTO transactions query
-            $sql1 = 'INSERT INTO transactions (receiver_name, receiver_email, amount,type, date)
-            VALUES (:receiver_name, :receiver_email, :withdraw,:type, NOW())';
+            $sql1 = 'INSERT INTO transactions (receiver_name, receiver_email,sender_email,amount,type, date)
+            VALUES (:receiver_name, :receiver_email,:sender_email,:deposit,:type, NOW())';
 
             $stmt1 = $pdo->prepare($sql1);
 
             // Bind parameters for the first query
             $stmt1->bindParam(':receiver_name', $receiver_name);
             $stmt1->bindParam(':receiver_email', $receiver_email);
-            $stmt1->bindParam(':withdraw', $withdraw);
+            $stmt1->bindParam(':sender_email', $receiver_email);
             $stmt1->bindParam(':type', $type);
+            $stmt1->bindParam(':deposit', $withdraw);
 
             $stmt1->execute();  // Execute the first query
 

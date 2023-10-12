@@ -16,6 +16,7 @@ $transactions = [
     'id' => DataTypes::INTAUTO,
     'receiver_name' => DataTypes::STRINGNOTNULL,
     'receiver_email' => DataTypes::STRINGNOTNULL,
+    'sender_email' => DataTypes::STRINGNOTNULL,
     'amount' => DataTypes::FLOATNOTNULL,
     'date' => DataTypes::TIMESTAMPNOTNULLABLE,
     'type' => DataTypes::STRINGNOTNULL
