@@ -13,11 +13,11 @@ require_once './vendor/autoload.php';
 
 //         # code...
 if (isset($_POST['add_record'])) {
-    $columns = ['name', 'email', 'password', 'balance'];
+    $columns = ['name', 'email', 'password'];
     // echo " $columns[$i] " . ' => '  . $_POST[$columns[$i]];
     $name = $_POST["name"];
     $email = $_POST["email"];
-    $balance = $_POST["balance"];
+
     $password = $_POST["password"];
 
 
@@ -26,7 +26,7 @@ if (isset($_POST['add_record'])) {
 
 
     $registration = new Registration();
-    $validated = $registration->formValidationState(name: $name, email: $email, password: $password, balance: $balance);
+    $validated = $registration->formValidationState(name: $name, email: $email, password: $password, balance: NULL);
     $hashed_password = password_hash($password, PASSWORD_BCRYPT);
     //convert balance to float
 

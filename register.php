@@ -28,10 +28,7 @@ include './actionregister.php';
             <label>Email:</label><br>
             <input type="text" name="email" class="demo-form-field" />
         </div>
-        <div class="demo-form-row">
-            <label>Balance:</label><br>
-            <input type="number" name="balance" class="demo-form-field" />
-        </div>
+
         <div class="demo-form-row">
             <label>Password:</label><br>
             <input type="password" name="password" class="demo-form-field" />

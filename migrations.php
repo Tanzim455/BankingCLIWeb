@@ -17,7 +17,8 @@ $transactions = [
     'receiver_name' => DataTypes::STRINGNOTNULL,
     'receiver_email' => DataTypes::STRINGNOTNULL,
     'amount' => DataTypes::FLOATNOTNULL,
-    'date' => DataTypes::TIMESTAMPNOTNULLABLE
+    'date' => DataTypes::TIMESTAMPNOTNULLABLE,
+    'type' => DataTypes::STRINGNOTNULL
 
 ];
 $users = [
@@ -25,6 +26,6 @@ $users = [
     'name' => DataTypes::STRINGNOTNULL,
     'email' => DataTypes::STRINGUNIQUENOTNULL,
     'password' => DataTypes::STRINGNOTNULL,
-    'balance' => DataTypes::FLOATNOTNULL
+    'balance' => DataTypes::FLOATNULLABLE
 
 ];

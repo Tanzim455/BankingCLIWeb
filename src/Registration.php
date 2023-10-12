@@ -108,7 +108,7 @@ class Registration
             $this->write(array: $array, file: $file, filePath: $phpFilePath, variableName: "users");
         }
     }
-    public function formValidationMessage(string $email, string $password, string $name, float $balance): bool
+    public function formValidationMessage(string $email, string $password, string $name, ?float $balance): bool
     {
         $valid = true; // Assume the input is valid initially
 
@@ -136,7 +136,7 @@ class Registration
         return $valid;
     }
 
-    public function formValidationState(string $email, string $password, string $name, float $balance): bool
+    public function formValidationState(string $email, string $password, string $name, ?float $balance): bool
     {
         $isValid = true;
 
