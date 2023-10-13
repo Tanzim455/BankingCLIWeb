@@ -5,7 +5,7 @@ use App\Web\Redirect;
 include './actionlogin.php';
 require_once './vendor/autoload.php';
 
-Redirect::ifAuthenticated(sessionname: "email", location: "location:home.php");
+Redirect::ifAuthenticated(sessionname: "email", location: "location:index.php");
 
 
 ?>

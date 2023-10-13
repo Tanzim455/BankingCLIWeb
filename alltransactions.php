@@ -19,6 +19,3 @@ $stmt->execute([
 ]);
 
 $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-if (!count($result)) {
-    echo "Sorry you dont have any transactions";
-}
