@@ -1,5 +1,7 @@
 <?php
 
+use App\Login;
+use App\Web\Database;
 use App\Web\Date;
 use App\Web\Redirect;
 
@@ -11,6 +13,13 @@ include 'alltransactions.php';
 Redirect::ifNotAuthenticated(sessionname: "email", location: "location:login.php");
 $name = $_SESSION["name"];
 $balance = $_SESSION["balance"];
+$authuseremail = $_SESSION["email"];
+
+$login = new Login();
+$balance = $login->viewAuthUsersBalance(authuseremail: $authuseremail);
+
+
+
 ?>
 <?php
 $pagetitle = "Dashboard";

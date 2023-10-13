@@ -1,8 +1,6 @@
 <?php
 
-
-
-
+use App\Login;
 use App\Web\Redirect;
 
 
@@ -11,7 +9,9 @@ require_once './vendor/autoload.php';
 session_start();
 Redirect::ifNotAuthenticated(sessionname: "email", location: "location:login.php");
 
-$balance = $_SESSION["balance"];
+$authuseremail = $_SESSION["email"];
+$login = new Login();
+$balance = $login->viewAuthUsersBalance(authuseremail: $authuseremail);
 ?>
 
 <?php

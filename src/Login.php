@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace App;
 
+use App\Web\Database;
+use PDO;
+
 class Login
 {
     public function filterEmail(array $array, string $email, string $filterBy): array
@@ -55,5 +58,17 @@ class Login
         }
 
         return false;
+    }
+    public function viewAuthUsersBalance(string $authuseremail): float
+    {
+        $database = new Database();
+        $pdo = $database->run();
+        $sql = "SELECT balance FROM users WHERE email =:auth_user_email";
+        $statement = $pdo->prepare($sql);
+        $statement->bindParam(':auth_user_email', $authuseremail, PDO::PARAM_STR);
+        $statement->execute();
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
+        ['balance' => $balance] = $result;
+        return $balance;
     }
 }
