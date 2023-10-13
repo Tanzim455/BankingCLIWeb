@@ -3,38 +3,67 @@
 
 
 // include './actionregister.php';
+
+use App\Web\Redirect;
+
 include './actionregister.php';
 
 
+require_once './vendor/autoload.php';
 
+Redirect::ifAuthenticated(sessionname: "email", location: "location:index.php");
+$title = "Register To Your Account";
 
 
 //         # code...
 
 
 ?>
+<?php include './layouts/loginregistrationheader.php'; ?>
 
-
-
-
-
-<body>
-    <form name="frmAdd" action="actionregister.php" method="POST">
-        <div class="demo-form-row">
-            <label>Name:</label><br>
-            <input type="text" name="name" class="demo-form-field" />
-        </div>
-        <div class="demo-form-row">
-            <label>Email:</label><br>
-            <input type="text" name="email" class="demo-form-field" />
+<body class="h-full bg-slate-100">
+    <div class="flex flex-col justify-center min-h-full py-12 sm:px-6 lg:px-8">
+        <div class="sm:mx-auto sm:w-full sm:max-w-md">
+            <h2 class="mt-6 text-2xl font-bold leading-9 tracking-tight text-center text-gray-900">
+                Create A New Account
+            </h2>
         </div>
 
-        <div class="demo-form-row">
-            <label>Password:</label><br>
-            <input type="password" name="password" class="demo-form-field" />
+        <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-[480px]">
+            <div class="px-6 py-12 bg-white shadow sm:rounded-lg sm:px-12">
+                <form class="space-y-6" action="actionregister.php" method="POST">
+                    <div>
+                        <label for="name" class="block text-sm font-medium leading-6 text-gray-900">Name</label>
+                        <div class="mt-2">
+                            <input id="name" name="name" type="text" required class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-emerald-600 sm:text-sm sm:leading-6 p-2" />
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email address</label>
+                        <div class="mt-2">
+                            <input id="email" name="email" type="email" autocomplete="email" required class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-emerald-600 sm:text-sm sm:leading-6 p-2" />
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="password" class="block text-sm font-medium leading-6 text-gray-900">Password</label>
+                        <div class="mt-2">
+                            <input id="password" name="password" type="password" autocomplete="current-password" required class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-emerald-600 sm:text-sm sm:leading-6 p-2" />
+                        </div>
+                    </div>
+
+                    <div>
+                        <input name="add_record" type="submit" class="flex w-full justify-center rounded-md bg-emerald-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-emerald-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-600">
+
+                    </div>
+                </form>
+            </div>
+
+            <p class="mt-10 text-sm text-center text-gray-500">
+                Already a customer?
+                <a href="login.php" class="font-semibold leading-6 text-emerald-600 hover:text-emerald-500">Sign-in</a>
+            </p>
         </div>
-        <div class="demo-form-row">
-            <input name="add_record" type="submit" value="Add" class="demo-form-submit">
-        </div>
-    </form>
+    </div>
 </body>
