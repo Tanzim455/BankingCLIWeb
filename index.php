@@ -1,5 +1,6 @@
 <?php
 
+use App\Web\Date;
 use App\Web\Redirect;
 
 
@@ -91,7 +92,13 @@ include './layouts/header.php';
 
 
                                                     <td class="whitespace-nowrap px-2 py-4 text-sm text-gray-500">
-                                                        <?php echo $arr['date']; ?></td>
+                                                        <?php
+                                                        $date = $arr["date"];
+                                                        echo  Date::formatter(date: $date, format: 'd M Y h:i:A')
+
+
+
+                                                        ?></td>
                                                 </tr>
                                             <?php endforeach; ?>
                                             <?php if (!count($result)) echo "You dont have any transactions"; ?>

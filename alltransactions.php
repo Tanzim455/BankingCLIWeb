@@ -6,7 +6,9 @@ require_once './vendor/autoload.php';
 
 
 use App\Web\Database;
+use App\Web\Redirect;
 
+Redirect::ifNotAuthenticated(sessionname: "email", location: "location:login.php");
 $database = new Database();
 $email = $_SESSION["email"];
 
