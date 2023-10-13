@@ -1,4 +1,7 @@
 <?php
+
+use App\Web\Date;
+
 session_start();
 include 'alltransactions.php';
 
@@ -14,8 +17,8 @@ foreach ($result as $arr) {
         echo "Amount: $+" . $amount . "\n\n";
     }
     if ($type !== "date") {
-        $date_create = date_create($date);
-        echo $date_create->format('d M Y h:i:A');
+
+        echo Date::formatter(date: $date, format: 'd M Y h:i:A');
     }
     echo "Reciever email " . $to . "\n";
     echo "Receiver Name" . $from . "\n";
