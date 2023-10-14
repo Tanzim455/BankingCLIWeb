@@ -36,17 +36,23 @@ class Login
             }
         }
     }
-    public function viewBalanceorName(array $filtered_email, string $option): float|bool|string
+    public function viewAuthUserName(array $filtered_email): bool|string
     {
-        if ($filtered_email && $option === 'balance') {
-            ['balance' => $balance] = $this->flattenArray(filtered_email: $filtered_email);
 
-            return $balance;
-        }
-        if ($filtered_email && $option === 'name') {
+        if ($filtered_email) {
             ['name' => $name] = $this->flattenArray(filtered_email: $filtered_email);
 
             return $name;
+        }
+        return false;
+    }
+    public function viewAdminStatus(array $filtered_email)
+    {
+
+        if ($filtered_email) {
+            ['is_admin' => $is_admin] = $this->flattenArray(filtered_email: $filtered_email);
+
+            return $is_admin;
         }
         return false;
     }

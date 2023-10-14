@@ -29,7 +29,7 @@ if (isset($_POST['add_record'])) {
     }
     $login = new Login();
     if ($check_email_exists) {
-        $sql = "SELECT name,email,password,balance FROM users WHERE email='$email';";
+        $sql = "SELECT name,email,password,balance,is_admin FROM users WHERE email='$email';";
         $db = new Database();
         $pdo = $db->run();
         $result = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
@@ -42,12 +42,17 @@ if (isset($_POST['add_record'])) {
         if ($isLoggedIn) {
             $_SESSION["email"] = $email;
 
-            $balance = $login->viewBalanceorName(filtered_email: $result, option: 'balance');
-            $name = $login->viewBalanceorName(filtered_email: $result, option: 'name');
+
+            $name = $login->viewAuthUserName(filtered_email: $result);
 
             $_SESSION["name"] = $name;
-            $_SESSION["balance"] = $balance;
-            header("location:index.php");
+            var_dump($name);
+            // $_SESSION["balance"] = $balance;
+            $adminstatus = $login->viewAdminStatus(filtered_email: $result);
+            if (!$adminstatus) {
+                header("location:index.php");
+            }
+            header("location:adminviewcustomers.php");
         }
     }
 }

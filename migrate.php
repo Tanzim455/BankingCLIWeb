@@ -6,8 +6,8 @@ require_once 'vendor/autoload.php';
 if (file_exists('migrations.php')) {
     include 'migrations.php';
 }
-Database::dropTables(tablename: "users");
-Database::makeTable(tablename: "users", array: $users);
+// Database::dropTables(tablename: "users");
+// Database::makeTable(tablename: "users", array: $users);
 //make a table
 // Database::makeTable(tablename: "transactions", array: $transactions);
 //Drop table
@@ -58,7 +58,30 @@ Database::makeTable(tablename: "users", array: $users);
 // }
 
 // Database::dropTables("users");
-Database::dropTables("transactions");
+// Database::dropTables("transactions");
 
-// Database::makeTable("users", $users);
-Database::makeTable("transactions", $transactions);
+// // Database::makeTable("users", $users);
+// Database::makeTable("transactions", $transactions);
+
+//Create admin
+$database = new Database();
+$pdo = $database->run();
+$name = "Admin One";
+$password = "password";
+$hashed_password = password_hash($password, PASSWORD_BCRYPT);
+$email = "admin1@gmail.com";
+$is_admin = 1;
+$sql1 = 'INSERT INTO users (name, email,password,is_admin)
+VALUES (:name, :email,:password, :is_admin)';
+
+
+$stmt1 = $pdo->prepare($sql1);
+
+// Bind parameters for the first query
+$stmt1->bindParam(':name', $name);
+$stmt1->bindParam(':email', $email);
+$stmt1->bindParam(':password', $hashed_password);
+$stmt1->bindParam(':is_admin', $is_admin);
+
+
+$stmt1->execute();  // Execute the first query
