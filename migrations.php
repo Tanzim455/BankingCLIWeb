@@ -3,14 +3,7 @@
 use App\DataTypes;
 
 require_once 'vendor/autoload.php';
-$admins = [
-    'id' => DataTypes::INTAUTO,
 
-    'email' => DataTypes::STRINGUNIQUENOTNULL,
-    'password' => DataTypes::STRINGNOTNULL,
-
-
-];
 
 $transactions = [
     'id' => DataTypes::INTAUTO,
@@ -27,6 +20,7 @@ $users = [
     'name' => DataTypes::STRINGNOTNULL,
     'email' => DataTypes::STRINGUNIQUENOTNULL,
     'password' => DataTypes::STRINGNOTNULL,
-    'balance' => DataTypes::FLOATNULLABLE
+    'balance' => DataTypes::FLOATNULLABLE,
+    'is_admin' => DataTypes::INTNULLABLE
 
 ];

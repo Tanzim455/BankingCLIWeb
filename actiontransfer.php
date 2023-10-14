@@ -74,7 +74,7 @@ if (isset($_POST['add_record'])) {
 
                 $stmt1->execute();  // Execute the first query
 
-                $stmt1->execute();  // Execute the first query
+                // Execute the first query
 
                 //UPDATE senders balance
                 $sql2 = 'UPDATE users SET balance =:senders_updated_balance WHERE email =:sender_email';

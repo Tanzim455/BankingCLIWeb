@@ -6,7 +6,8 @@ require_once 'vendor/autoload.php';
 if (file_exists('migrations.php')) {
     include 'migrations.php';
 }
-
+Database::dropTables(tablename: "users");
+Database::makeTable(tablename: "users", array: $users);
 //make a table
 // Database::makeTable(tablename: "transactions", array: $transactions);
 //Drop table
