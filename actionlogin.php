@@ -49,11 +49,14 @@ if (isset($_POST['add_record'])) {
             var_dump($name);
             // $_SESSION["balance"] = $balance;
             $adminstatus = $login->viewAdminStatus(filtered_email: $result);
-            // var_dump(!$adminstatus);
+
             if (!$adminstatus) {
                 header("location:index.php");
             }
-            // header("location:adminviewcustomers.php");
+
+            if ($adminstatus) {
+                header("location:adminviewcustomers.php");
+            }
         }
     }
 }

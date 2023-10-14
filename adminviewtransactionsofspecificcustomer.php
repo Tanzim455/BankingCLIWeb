@@ -1,5 +1,11 @@
-<!DOCTYPE html>
-<html class="h-full bg-gray-100" lang="en">
+<?php
+
+use App\Web\Date;
+
+session_start();
+require_once './vendor/autoload.php';
+
+?>
 
 <?php
 $pagetitle = "View Transaction of Specific user";
@@ -7,6 +13,20 @@ include './layouts/header.php';
 
 
 ?>
+
+<?php
+if (isset($_SESSION['result'])) {
+    $result = $_SESSION['result'];
+
+    // Use $result as needed
+
+    // Unset the session variable to clear it after use
+    unset($_SESSION['result']);
+}
+
+?>
+
+
 
 <body class="h-full">
     <div class="min-h-full">
@@ -20,9 +40,12 @@ include './layouts/header.php';
             <header class="py-10">
                 <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                     <div>
+                        <form action="actionviewtransactionadmin.php" method="post">
+                            <input type="text" name="check_email" id="fir" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Enter users email">
+                            <input type="submit" name="add_record" class="py-2.5 px-5 mr-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700" />
 
-                        <input type="text" name="check_email" id="fir" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Enter users email">
-                        <input type="submit" name="add_record" class="py-2.5 px-5 mr-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700" />
+                        </form>
+
                     </div>
                 </div>
                 <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -67,78 +90,35 @@ include './layouts/header.php';
                                             </tr>
                                         </thead>
                                         <tbody class="divide-y divide-gray-200 bg-white">
-                                            <tr>
-                                                <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-gray-800 sm:pl-0">
-                                                    Bruce Wayne
-                                                </td>
-                                                <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-gray-500 sm:pl-0">
-                                                    bruce@wayne.com
-                                                </td>
-                                                <td class="whitespace-nowrap px-2 py-4 text-sm font-medium text-emerald-600">
-                                                    +$10,240
-                                                </td>
-                                                <td class="whitespace-nowrap px-2 py-4 text-sm text-gray-500">
-                                                    29 Sep 2023, 09:25 AM
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-gray-800 sm:pl-0">
-                                                    Al Nahian
-                                                </td>
-                                                <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-gray-500 sm:pl-0">
-                                                    alnahian@2003.com
-                                                </td>
-                                                <td class="whitespace-nowrap px-2 py-4 text-sm font-medium text-red-600">
-                                                    -$2,500
-                                                </td>
-                                                <td class="whitespace-nowrap px-2 py-4 text-sm text-gray-500">
-                                                    15 Sep 2023, 06:14 PM
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-gray-800 sm:pl-0">
-                                                    Muhammad Alp Arslan
-                                                </td>
-                                                <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-gray-500 sm:pl-0">
-                                                    alp@arslan.com
-                                                </td>
-                                                <td class="whitespace-nowrap px-2 py-4 text-sm font-medium text-emerald-600">
-                                                    +$49,556
-                                                </td>
-                                                <td class="whitespace-nowrap px-2 py-4 text-sm text-gray-500">
-                                                    03 Jul 2023, 12:55 AM
-                                                </td>
-                                            </tr>
 
-                                            <tr>
-                                                <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-gray-800 sm:pl-0">
-                                                    Povilas Korop
-                                                </td>
-                                                <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-gray-500 sm:pl-0">
-                                                    povilas@korop.com
-                                                </td>
-                                                <td class="whitespace-nowrap px-2 py-4 text-sm font-medium text-emerald-600">
-                                                    +$6,125
-                                                </td>
-                                                <td class="whitespace-nowrap px-2 py-4 text-sm text-gray-500">
-                                                    07 Jun 2023, 10:00 PM
-                                                </td>
-                                            </tr>
+                                            <?php if (isset($result)) foreach ($result as $arr) : ?>
 
-                                            <tr>
-                                                <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-gray-800 sm:pl-0">
-                                                    Martin Joo
-                                                </td>
-                                                <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-gray-500 sm:pl-0">
-                                                    martin@joo.com
-                                                </td>
-                                                <td class="whitespace-nowrap px-2 py-4 text-sm font-medium text-red-600">
-                                                    -$125
-                                                </td>
-                                                <td class="whitespace-nowrap px-2 py-4 text-sm text-gray-500">
-                                                    02 Feb 2023, 8:30 PM
-                                                </td>
-                                            </tr>
+                                                <tr>
+                                                    <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-gray-800 sm:pl-0"><?php echo $arr->receiver_name; ?></td>
+                                                    <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-gray-500 sm:pl-0">
+                                                        <?php echo $arr->receiver_email; ?></td>
+                                                    <td class="whitespace-nowrap px-2 py-4 text-sm font-medium <?php echo ($arr->type == 'Deposit') ? 'text-emerald-600' : 'text-red-600'; ?>">
+                                                        <?php echo ($arr->type == 'Deposit') ? '+' . $arr->type : '-' . $arr->amount; ?>
+                                                    </td>
+
+
+                                                    <td class="whitespace-nowrap px-2 py-4 text-sm text-gray-500">
+                                                        <?php
+                                                        $date = $arr->date;
+                                                        echo  Date::formatter(date: $date, format: 'd M Y h:i:A')
+
+
+
+                                                        ?></td>
+                                                </tr>
+                                            <?php endforeach; ?>
+
+
+
+
+
+
+
                                         </tbody>
                                     </table>
                                 </div>

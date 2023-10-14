@@ -13,7 +13,8 @@ $database = new Database();
 $email = $_SESSION["email"];
 
 $pdo = $database->run();
-$sql = "SELECT receiver_name, receiver_email, amount, type, date FROM transactions WHERE sender_email=:email";
+$sql = "SELECT receiver_name, receiver_email, amount, type, 
+date FROM transactions WHERE sender_email=:email";
 $stmt = $pdo->prepare($sql);
 
 $stmt->execute([
