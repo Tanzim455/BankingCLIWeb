@@ -29,7 +29,7 @@ if (isset($_SESSION['errormessage'])) {
     // Use $result as needed
 
     // Unset the session variable to clear it after use
-    unset($_SESSION['result']);
+    unset($_SESSION['errormessage']);
 }
 
 ?>
@@ -106,7 +106,7 @@ if (isset($_SESSION['errormessage'])) {
                                                     <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-gray-500 sm:pl-0">
                                                         <?php echo $arr->receiver_email; ?></td>
                                                     <td class="whitespace-nowrap px-2 py-4 text-sm font-medium <?php echo ($arr->type == 'Deposit') ? 'text-emerald-600' : 'text-red-600'; ?>">
-                                                        <?php echo ($arr->type == 'Deposit') ? '+' . $arr->type : '-' . $arr->amount; ?>
+                                                        <?php echo ($arr->type == 'Deposit') ? '+' . $arr->amount : '-' . $arr->amount; ?>
                                                     </td>
 
 
