@@ -56,6 +56,7 @@ if (isset($_POST['add_record'])) {
 
             if ($adminstatus) {
                 header("location:adminviewcustomers.php");
+                $_SESSION['adminstatus'] = $adminstatus;
             }
         }
     }

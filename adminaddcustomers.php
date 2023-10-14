@@ -1,6 +1,18 @@
 <?php
+session_start();
+require_once './vendor/autoload.php';
+
+use App\Web\Redirect;
+
 $pagetitle = "Add Customers";
 include './layouts/header.php';
+
+
+Redirect::ifNotAuthenticated(sessionname: "email", location: "location:login.php");
+if (isset($_SESSION['adminstatus'])) {
+    $adminstatus = $_SESSION['adminstatus'];
+    echo $adminstatus;
+}
 
 ?>
 
@@ -22,22 +34,17 @@ include './layouts/header.php';
         <main class="-mt-32">
             <div class="px-4 pb-12 mx-auto max-w-7xl sm:px-6 lg:px-8">
                 <div class="bg-white rounded-lg">
-                    <form class="bg-white shadow-sm ring-1 ring-gray-900/5 sm:rounded-xl md:col-span-2">
+                    <form class="bg-white shadow-sm ring-1 ring-gray-900/5 sm:rounded-xl md:col-span-2" action="adminactionregsiter.php" method="POST">
                         <div class="px-4 py-6 sm:p-8">
                             <div class="grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                                 <div class="sm:col-span-3">
-                                    <label for="first-name" class="block text-sm font-medium leading-6 text-gray-900">First Name</label>
+                                    <label for="first-name" class="block text-sm font-medium leading-6 text-gray-900">Name</label>
                                     <div class="mt-2">
-                                        <input type="text" name="first-name" id="first-name" autocomplete="given-name" required class="block w-full p-2 text-gray-900 border-0 rounded-md shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:text-sm sm:leading-6" />
+                                        <input type="text" name="name" id="first-name" autocomplete="given-name" required class="block w-full p-2 text-gray-900 border-0 rounded-md shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:text-sm sm:leading-6" />
                                     </div>
                                 </div>
 
-                                <div class="sm:col-span-3">
-                                    <label for="last-name" class="block text-sm font-medium leading-6 text-gray-900">Last Name</label>
-                                    <div class="mt-2">
-                                        <input type="text" name="last-name" id="last-name" autocomplete="family-name" required class="block w-full p-2 text-gray-900 border-0 rounded-md shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:text-sm sm:leading-6" />
-                                    </div>
-                                </div>
+
 
                                 <div class="sm:col-span-3">
                                     <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email Address</label>
@@ -58,9 +65,10 @@ include './layouts/header.php';
                             <button type="reset" class="text-sm font-semibold leading-6 text-gray-900">
                                 Cancel
                             </button>
-                            <button type="submit" class="px-3 py-2 text-sm font-semibold text-white rounded-md shadow-sm bg-sky-600 hover:bg-sky-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-600">
-                                Create Customer
-                            </button>
+                            <input type="submit" name="add_record" class="px-3 py-2 text-sm font-semibold text-white 
+                            rounded-md shadow-sm bg-sky-600 hover:bg-sky-500 focus-visible:outline 
+                            focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-600">
+
                         </div>
                     </form>
                 </div>

@@ -75,10 +75,3 @@ if (file_exists('migrations.php')) {
 
 // $admin = new Admin();
 // $admin->register(name: $name, email: $email, password: $hashed_password, is_admin: 1);
-$database = new Database();
-$pdo = $database->run();
-$sql = "SELECT name,email FROM users WHERE is_admin=0";
-$stmt = $pdo->query($sql);
-$stmt->execute();
-$result = $stmt->fetchAll(PDO::FETCH_OBJ);
-var_dump($result);

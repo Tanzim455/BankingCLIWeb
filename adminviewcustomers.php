@@ -3,13 +3,13 @@ session_start();
 require_once './vendor/autoload.php';
 
 use App\Web\Admin;
+use App\Web\Redirect;
 
 $pagetitle = "Customers";
 include './layouts/header.php';
 $admin = new Admin();
 $allusers = $admin->viewAllUsers();
-
-
+Redirect::ifNotAuthenticated(sessionname: "email", location: "location:login.php");
 
 ?>
 
