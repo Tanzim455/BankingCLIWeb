@@ -5,10 +5,10 @@ use App\DataTypes;
 require_once 'vendor/autoload.php';
 $admins = [
     'id' => DataTypes::INTAUTO,
-    'name' => DataTypes::STRINGNOTNULL,
+
     'email' => DataTypes::STRINGUNIQUENOTNULL,
     'password' => DataTypes::STRINGNOTNULL,
-    'balance' => DataTypes::FLOATNOTNULL
+
 
 ];
 
