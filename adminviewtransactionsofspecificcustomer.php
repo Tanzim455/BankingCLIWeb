@@ -23,6 +23,14 @@ if (isset($_SESSION['result'])) {
     // Unset the session variable to clear it after use
     unset($_SESSION['result']);
 }
+if (isset($_SESSION['errormessage'])) {
+    $errormessage = $_SESSION['errormessage'];
+
+    // Use $result as needed
+
+    // Unset the session variable to clear it after use
+    unset($_SESSION['result']);
+}
 
 ?>
 
@@ -112,6 +120,7 @@ if (isset($_SESSION['result'])) {
                                                         ?></td>
                                                 </tr>
                                             <?php endforeach; ?>
+                                            <?php if (isset($errormessage)) echo "The email does not have any transactions"; ?>
 
 
 

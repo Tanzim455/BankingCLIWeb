@@ -28,4 +28,8 @@ date FROM transactions WHERE sender_email=:email";
         $_SESSION['result'] = $result;
         header("location:adminviewtransactionsofspecificcustomer.php");
     }
+    if (!count($result)) {
+        $_SESSION['errormessage'] = "Sorry the email does not exist";
+        header("location:adminviewtransactionsofspecificcustomer.php");
+    }
 }
