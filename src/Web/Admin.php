@@ -39,4 +39,16 @@ VALUES (:name, :email,:password, :is_admin)';
         $result = $stmt->fetchAll(PDO::FETCH_OBJ);
         return $result;
     }
+    public function viewAllTransactions(): array
+    {
+
+
+        $database = new Database();
+        $pdo = $database->run();
+        $sql = "SELECT receiver_name, receiver_email, amount, type, date FROM transactions";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_OBJ);
+        return $result;
+    }
 }

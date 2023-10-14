@@ -20,4 +20,4 @@ $stmt->execute([
     ':email' => $email
 ]);
 
-$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+$result = $stmt->fetchAll(PDO::FETCH_OBJ);

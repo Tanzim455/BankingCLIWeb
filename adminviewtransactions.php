@@ -1,7 +1,14 @@
 <?php
+session_start();
+require_once './vendor/autoload.php';
+
+use App\Web\Admin;
+use App\Web\Date;
+
 $pagetitle = "All Transactions";
 include './layouts/header.php';
-
+$admin = new Admin();
+$result = $admin->viewAllTransactions();
 ?>
 
 
@@ -41,6 +48,9 @@ include './layouts/header.php';
                                                 <th scope="col" class="whitespace-nowrap py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">
                                                     Customer Name
                                                 </th>
+                                                <th scope="col" class="whitespace-nowrap py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">
+                                                    Email
+                                                </th>
                                                 <th scope="col" class="whitespace-nowrap px-2 py-3.5 text-left text-sm font-semibold text-gray-900">
                                                     Amount
                                                 </th>
@@ -50,63 +60,35 @@ include './layouts/header.php';
                                             </tr>
                                         </thead>
                                         <tbody class="divide-y divide-gray-200 bg-white">
-                                            <tr>
-                                                <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-gray-800 sm:pl-0">
-                                                    Bruce Wayne
-                                                </td>
-                                                <td class="whitespace-nowrap px-2 py-4 text-sm font-medium text-emerald-600">
-                                                    +$10,240
-                                                </td>
-                                                <td class="whitespace-nowrap px-2 py-4 text-sm text-gray-500">
-                                                    29 Sep 2023, 09:25 AM
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-gray-800 sm:pl-0">
-                                                    Al Nahian
-                                                </td>
-                                                <td class="whitespace-nowrap px-2 py-4 text-sm font-medium text-red-600">
-                                                    -$2,500
-                                                </td>
-                                                <td class="whitespace-nowrap px-2 py-4 text-sm text-gray-500">
-                                                    15 Sep 2023, 06:14 PM
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-gray-800 sm:pl-0">
-                                                    Muhammad Alp Arslan
-                                                </td>
-                                                <td class="whitespace-nowrap px-2 py-4 text-sm font-medium text-emerald-600">
-                                                    +$49,556
-                                                </td>
-                                                <td class="whitespace-nowrap px-2 py-4 text-sm text-gray-500">
-                                                    03 Jul 2023, 12:55 AM
-                                                </td>
-                                            </tr>
 
-                                            <tr>
-                                                <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-gray-800 sm:pl-0">
-                                                    Povilas Korop
-                                                </td>
-                                                <td class="whitespace-nowrap px-2 py-4 text-sm font-medium text-emerald-600">
-                                                    +$6,125
-                                                </td>
-                                                <td class="whitespace-nowrap px-2 py-4 text-sm text-gray-500">
-                                                    07 Jun 2023, 10:00 PM
-                                                </td>
-                                            </tr>
+                                            <?php if (count($result)) foreach ($result as $arr) : ?>
 
-                                            <tr>
-                                                <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-gray-800 sm:pl-0">
-                                                    Martin Joo
-                                                </td>
-                                                <td class="whitespace-nowrap px-2 py-4 text-sm font-medium text-red-600">
-                                                    -$125
-                                                </td>
-                                                <td class="whitespace-nowrap px-2 py-4 text-sm text-gray-500">
-                                                    02 Feb 2023, 8:30 PM
-                                                </td>
-                                            </tr>
+                                                <tr>
+                                                    <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-gray-800 sm:pl-0"><?php echo $arr->receiver_name; ?></td>
+                                                    <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-gray-500 sm:pl-0">
+                                                        <?php echo $arr->receiver_email; ?></td>
+                                                    <td class="whitespace-nowrap px-2 py-4 text-sm font-medium <?php echo ($arr->type == 'Deposit') ? 'text-emerald-600' : 'text-red-600'; ?>">
+                                                        <?php echo ($arr->type == 'Deposit') ? '+' . $arr->type : '-' . $arr->amount; ?>
+                                                    </td>
+
+
+                                                    <td class="whitespace-nowrap px-2 py-4 text-sm text-gray-500">
+                                                        <?php
+                                                        $date = $arr->date;
+                                                        echo  Date::formatter(date: $date, format: 'd M Y h:i:A')
+
+
+
+                                                        ?></td>
+                                                </tr>
+                                            <?php endforeach; ?>
+                                            <?php if (!count($result)) echo "You dont have any transactions"; ?>
+
+
+
+
+
+
                                         </tbody>
                                     </table>
                                 </div>

@@ -12,7 +12,7 @@ session_start();
 include 'alltransactions.php';
 Redirect::ifNotAuthenticated(sessionname: "email", location: "location:login.php");
 $name = $_SESSION["name"];
-$balance = $_SESSION["balance"];
+
 $authuseremail = $_SESSION["email"];
 
 $login = new Login();
@@ -89,18 +89,17 @@ include './layouts/header.php';
                                             <?php if (count($result)) foreach ($result as $arr) : ?>
 
                                                 <tr>
-                                                    <td class="whitespace-nowrap py-4 pl-4 
-                                                pr-3 text-sm text-gray-800 sm:pl-0"><?php echo $arr['receiver_name']; ?></td>
+                                                    <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-gray-800 sm:pl-0"><?php echo $arr->receiver_name; ?></td>
                                                     <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-gray-500 sm:pl-0">
-                                                        <?php echo $arr['receiver_email']; ?></td>
-                                                    <td class="whitespace-nowrap px-2 py-4 text-sm font-medium <?php echo ($arr['type'] == 'Deposit') ? 'text-emerald-600' : 'text-red-600'; ?>">
-                                                        <?php echo ($arr['type'] == 'Deposit') ? '+' . $arr['amount'] : '-' . $arr['amount']; ?>
+                                                        <?php echo $arr->receiver_email; ?></td>
+                                                    <td class="whitespace-nowrap px-2 py-4 text-sm font-medium <?php echo ($arr->type == 'Deposit') ? 'text-emerald-600' : 'text-red-600'; ?>">
+                                                        <?php echo ($arr->type == 'Deposit') ? '+' . $arr->type : '-' . $arr->amount; ?>
                                                     </td>
 
 
                                                     <td class="whitespace-nowrap px-2 py-4 text-sm text-gray-500">
                                                         <?php
-                                                        $date = $arr["date"];
+                                                        $date = $arr->date;
                                                         echo  Date::formatter(date: $date, format: 'd M Y h:i:A')
 
 

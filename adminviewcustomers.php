@@ -76,7 +76,7 @@ $allusers = $admin->viewAllUsers();
                                             </div>
                                         </li>
                                     <?php endforeach; ?>
-
+                                    <?php if (!count($allusers)) echo "Sorry there are no customers"; ?>
 
 
 
