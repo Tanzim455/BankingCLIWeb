@@ -22,9 +22,9 @@ if (isset($_POST['add_record'])) {
     $statement->execute();
     $result = $statement->fetch(PDO::FETCH_ASSOC);
     ['balance' => $balance] = $result;
-    // echo $balance;
+
     $updated_balance = $balance - $withdraw;
-    var_dump($updated_balance);
+
     $transaction = new Transaction();
     if ($withdraw < 0) {
         echo "Sorry you cant withdraw a negative number";

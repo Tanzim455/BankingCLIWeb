@@ -14,7 +14,7 @@ require_once './vendor/autoload.php';
 //         # code...
 if (isset($_POST['add_record'])) {
     $columns = ['name', 'email', 'password'];
-    // echo " $columns[$i] " . ' => '  . $_POST[$columns[$i]];
+
     $name = $_POST["name"];
     $email = $_POST["email"];
 
@@ -28,7 +28,7 @@ if (isset($_POST['add_record'])) {
     var_dump($check_email_exists);
 
     if ($validated && !$check_email_exists) {
-        echo "execute the query";
+        echo "Your registration is successful";
         $database = new Database();
         $stmt = $database->insert(array: $columns, tableName: "users", password: $hashed_password);
     }

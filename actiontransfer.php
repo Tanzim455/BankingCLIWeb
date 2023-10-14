@@ -39,10 +39,9 @@ if (isset($_POST['add_record'])) {
         $statement->execute();
         $result = $statement->fetch(PDO::FETCH_ASSOC);
         ['balance' => $receiver_balance, 'name' => $receiver_name] = $result;
-        echo $receiver_balance;
-        //find transfer amount of sender
-        //ensure tranfer money is not greater than senders balance 
-        var_dump($transfer);
+
+
+
         if ($transfer > $senders_balance) {
             echo "Sorry the amount you want to transfer is greater than your balance";
         }

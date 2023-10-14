@@ -22,9 +22,9 @@ if (isset($_POST['add_record'])) {
     $statement->execute();
     $result = $statement->fetch(PDO::FETCH_ASSOC);
     ['balance' => $balance] = $result;
-    // echo $balance;
+
     $updated_balance = $deposit + $balance;
-    var_dump($updated_balance);
+
     $transaction = new Transaction();
     if ($deposit < 0) {
         echo "Sorry you cant deposit a negative number";
