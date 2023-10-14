@@ -1,5 +1,6 @@
 <?php
 
+use App\Web\Admin;
 use App\Web\Database;
 
 require_once 'vendor/autoload.php';
@@ -64,24 +65,20 @@ if (file_exists('migrations.php')) {
 // Database::makeTable("transactions", $transactions);
 
 //Create admin
+// $database = new Database();
+// $pdo = $database->run();
+// $name = "Admin Two";
+// $password = "password";
+// $hashed_password = password_hash($password, PASSWORD_BCRYPT);
+// $email = "admin2@gmail.com";
+// $is_admin = 1;
+
+// $admin = new Admin();
+// $admin->register(name: $name, email: $email, password: $hashed_password, is_admin: 1);
 $database = new Database();
 $pdo = $database->run();
-$name = "Admin One";
-$password = "password";
-$hashed_password = password_hash($password, PASSWORD_BCRYPT);
-$email = "admin1@gmail.com";
-$is_admin = 1;
-$sql1 = 'INSERT INTO users (name, email,password,is_admin)
-VALUES (:name, :email,:password, :is_admin)';
-
-
-$stmt1 = $pdo->prepare($sql1);
-
-// Bind parameters for the first query
-$stmt1->bindParam(':name', $name);
-$stmt1->bindParam(':email', $email);
-$stmt1->bindParam(':password', $hashed_password);
-$stmt1->bindParam(':is_admin', $is_admin);
-
-
-$stmt1->execute();  // Execute the first query
+$sql = "SELECT name,email FROM users WHERE is_admin=0";
+$stmt = $pdo->query($sql);
+$stmt->execute();
+$result = $stmt->fetchAll(PDO::FETCH_OBJ);
+var_dump($result);
