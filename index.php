@@ -4,16 +4,18 @@ use App\Login;
 use App\Web\Database;
 use App\Web\Date;
 use App\Web\Redirect;
-
-
+use App\Web\Transaction;
+use App\Web\Transactions;
 
 require_once './vendor/autoload.php';
 session_start();
-include 'alltransactions.php';
+
 Redirect::ifNotAuthenticated(sessionname: "email", location: "location:login.php");
 $name = $_SESSION["name"];
 
 $authuseremail = $_SESSION["email"];
+$transactions = new Transactions();
+$result = $transactions->viewAllTransactionsofSingleUser(email: $authuseremail);
 
 $login = new Login();
 $balance = $login->viewAuthUsersBalance(authuseremail: $authuseremail);

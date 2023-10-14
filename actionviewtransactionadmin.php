@@ -2,6 +2,7 @@
 
 use App\Login;
 use App\Web\Database;
+use App\Web\Transactions;
 
 session_start();
 require_once './vendor/autoload.php';
@@ -9,20 +10,11 @@ require_once './vendor/autoload.php';
 
 if (isset($_POST["add_record"])) {
     $check_email = $_POST["check_email"];
-    $database = new Database();
+
     $errormessage = "The email does not have any transaction";
     $login = new Login();
-    $pdo = $database->run();
-    $sql = "SELECT receiver_name, receiver_email, amount, type, 
-date FROM transactions WHERE sender_email=:email";
-    $stmt = $pdo->prepare($sql);
-
-    $stmt->execute([
-        ':email' => $check_email
-    ]);
-
-    $result = $stmt->fetchAll(PDO::FETCH_OBJ);
-    var_dump($result);
+    $transactions = new Transactions();
+    $result = $transactions->viewAllTransactionsofSingleUser(email: $check_email);
 
     if (count($result)) {
         $_SESSION['result'] = $result;
