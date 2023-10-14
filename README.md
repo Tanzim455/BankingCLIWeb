@@ -8,5 +8,5 @@ Src folder there in Web folder there is a class called Database where there is a
 new PDO("mysql:host=$this->server;dbname=bankingapp", $this->username, $this->password);
 
 You can now run migrate.php it will create 2 tables and insert data of an admin
-
-For running CLI files run it form indexcli.php
+php migrate.php 
+For running CLI part run it form indexcli.php
