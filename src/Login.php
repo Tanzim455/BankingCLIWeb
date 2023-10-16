@@ -65,6 +65,15 @@ class Login
 
         return false;
     }
+    public function viewBalance($filtered_email): float|bool
+    {
+        if ($filtered_email) {
+            ['balance' => $balance] = $this->flattenArray(filtered_email: $filtered_email);
+
+            return $balance;
+        }
+        return false;
+    }
     public function viewAuthUsersBalance(string $authuseremail): float
     {
         $database = new Database();

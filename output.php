@@ -5,7 +5,7 @@ $users= array (
     'name' => 'Tanzim Ibthesam',
     'email' => 'tanzim67@gmail.com',
     'password' => '$2y$10$PDvvcWqJPnZCyT9YHa1qS.p0DQfAMO3z740Pn/otTf55RPNoYcBg.',
-    'balance' => 12500.0,
+    'balance' => 13000.0,
   ),
   1 => 
   array (

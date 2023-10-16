@@ -24,13 +24,16 @@ class Transaction
         $this->write(array: $array, file: $file, filePath: $transactionFilePath, variableName: "transactions");
     }
 
-    public function amountBalanceValidation(?float $balance, float $amount): void
+    public function amountBalanceValidation(?float $balance, float $amount, string $type): void
     {
-        if ($amount > $balance) {
-            echo "Sorry the amount is greater than your balance \n";
-        }
-        if ($amount < 0) {
+
+        if ($amount < 0 && $type === "WithDraw" || $type === "Deposit") {
             echo "Sorry The amount is a negative number \n";
+        }
+
+
+        if ($amount > $balance && $type === "WithDraw") {
+            echo "Sorry the amount is greater than your balance \n";
         }
     }
 

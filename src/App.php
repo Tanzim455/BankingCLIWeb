@@ -68,7 +68,7 @@ class App
                         echo "The email does not exist in database \n";
                     } else {
                         $result = $login->login(filtered_email: $filtered_email, inputpassword: $this->password);
-                        $balance = $login->viewBalance(filtered_email: $filtered_email, name: NULL);
+                        $balance = $login->viewBalance(filtered_email: $filtered_email);
                         ['email' => $authuseremail] = $login->flattenArray(filtered_email: $filtered_email);
                     }
 
@@ -89,7 +89,7 @@ class App
                                 $this->type = "WithDraw";
 
 
-                                $transaction->amountBalanceValidation(balance: $balance, amount: $this->amount);
+                                $transaction->amountBalanceValidation(balance: $balance, amount: $this->amount, type: $this->type);
 
                                 if (file_exists('transactions.php')) {
                                     include 'transactions.php';
@@ -135,7 +135,7 @@ class App
                                 $this->to = $authuseremail;
                                 $this->type = "Deposit";
 
-
+                                $transaction->amountBalanceValidation(balance: NULL, amount: $this->amount, type: $this->type);
 
                                 if (file_exists('transactions.php')) {
                                     include 'transactions.php';
@@ -190,7 +190,7 @@ class App
                                 if (!$this->check_email_exists) {
                                     echo "The email does not exist in database \n";
                                 }
-                                $transaction->amountBalanceValidation(balance: $balance, amount: $this->amount);
+                                $transaction->amountBalanceValidation(balance: $balance, amount: $this->amount, type: $this->type);
                                 if (file_exists('transactions.php')) {
                                     include 'transactions.php';
                                 }
