@@ -3,6 +3,7 @@
 use App\Registration;
 use App\Web\Database;
 
+session_start();
 require_once './vendor/autoload.php';
 
 
@@ -25,11 +26,14 @@ if (isset($_POST['add_record'])) {
     $hashed_password = password_hash($password, PASSWORD_BCRYPT);
 
     $check_email_exists = $registration->checkUserEmailExistsinDatabase(email: $email, tableName: "users", type: "Registration");
-    var_dump($check_email_exists);
+
 
     if ($validated && !$check_email_exists) {
-        echo "Your registration is successful";
+
         $database = new Database();
         $stmt = $database->insert(array: $columns, tableName: "users", password: $hashed_password);
+
+        $_SESSION['successmessage'] = "Registration successfully done";
+        header('location: register.php');
     }
 }

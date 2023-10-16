@@ -4,7 +4,7 @@ use App\Registration;
 use App\Web\Database;
 
 require_once './vendor/autoload.php';
-
+session_start();
 
 
 
@@ -36,7 +36,7 @@ if (isset($_POST['add_record'])) {
     var_dump($check_email_exists);
 
     if ($validated && !$check_email_exists) {
-        echo "execute the query";
+
         $database = new Database();
         $stmt = $database->insert(array: $columns, tableName: "users", password: $hashed_password);
     }
