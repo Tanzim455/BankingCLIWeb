@@ -23,10 +23,15 @@ if (isset($_POST['add_record'])) {
 
     $registration = new Registration();
     $validated = $registration->formValidationState(name: $name, email: $email, password: $password, balance: NULL);
+
     $hashed_password = password_hash($password, PASSWORD_BCRYPT);
 
     $check_email_exists = $registration->checkUserEmailExistsinDatabase(email: $email, tableName: "users", type: "Registration");
+    if ($check_email_exists) {
 
+        $_SESSION['errormessage'] = $registration->formValidationState(name: $name, email: $email, password: $password, balance: NULL);
+        echo "The error message is" . $_SESSION['errormessage'];
+    }
 
     if ($validated && !$check_email_exists) {
 

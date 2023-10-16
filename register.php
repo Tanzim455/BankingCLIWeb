@@ -14,7 +14,9 @@ require_once './vendor/autoload.php';
 Redirect::ifAuthenticated(sessionname: "email", location: "location:index.php");
 $title = "Register To Your Account";
 
-
+if (isset($_SESSION['errormessage'])) {
+    var_dump($_SESSION['errormessage']);
+}
 
 ?>
 <?php include './layouts/loginregistrationheader.php'; ?>

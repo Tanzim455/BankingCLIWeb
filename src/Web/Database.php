@@ -121,8 +121,7 @@ class Database
         }
         $stmt = $pdo->prepare("INSERT INTO $tableName ($implode) VALUES ($arrayValues)");
         for ($i = 0; $i <= count($array) - 1; $i++) {
-            //         # code...
-            // var_dump(":$columns[$i]", $_POST[$columns[$i]]) . PHP_EOL;
+
             if ($array[$i] === 'password') {
                 $stmt->bindParam(":$array[$i]", $password) . PHP_EOL;
             }
@@ -130,7 +129,6 @@ class Database
             if ($array[$i] !== 'password') {
                 $stmt->bindParam(":$array[$i]", $_POST[$array[$i]]) . PHP_EOL;
             }
-            //$stmt->bindParam(":$columns[$i]", $_POST[$columns[$i]]) . PHP_EOL;
         }
         $stmt->execute();
     }

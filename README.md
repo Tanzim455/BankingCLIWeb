@@ -10,3 +10,5 @@ new PDO("mysql:host=$this->server;dbname=bankingapp", $this->username, $this->pa
 You can now run migrate.php it will create 2 tables and insert data of an admin
 php migrate.php 
 For running CLI part run it form indexcli.php
+
+For admin part of cli run admin.php and get access to admin privilages

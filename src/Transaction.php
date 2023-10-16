@@ -27,12 +27,15 @@ class Transaction
     public function amountBalanceValidation(?float $balance, float $amount, string $type): void
     {
 
-        if ($amount < 0 && $type === "WithDraw" || $type === "Deposit") {
+        if ($amount < 0 && $type === "WithDraw" || $type === "Deposit" || $type === "Transfer") {
             echo "Sorry The amount is a negative number \n";
         }
 
 
         if ($amount > $balance && $type === "WithDraw") {
+            echo "Sorry the amount is greater than your balance \n";
+        }
+        if ($amount > $balance && $type === "Transfer") {
             echo "Sorry the amount is greater than your balance \n";
         }
     }
