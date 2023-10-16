@@ -9,10 +9,8 @@ include './layouts/header.php';
 
 
 Redirect::ifNotAuthenticated(sessionname: "email", location: "location:login.php");
-if (isset($_SESSION['adminstatus'])) {
-    $adminstatus = $_SESSION['adminstatus'];
-    echo $adminstatus;
-}
+
+
 
 ?>
 
@@ -36,7 +34,21 @@ if (isset($_SESSION['adminstatus'])) {
                 <div class="bg-white rounded-lg">
                     <form class="bg-white shadow-sm ring-1 ring-gray-900/5 sm:rounded-xl md:col-span-2" action="adminactionregsiter.php" method="POST">
                         <div class="px-4 py-6 sm:p-8">
+                            <?php if (isset($_SESSION['successmessage'])) : ?>
+                                <div class="flex items-center p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
+                                    <svg class="flex-shrink-0 inline w-4 h-4 mr-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+                                    </svg>
+                                    <span class="sr-only">Info</span>
+                                    <div>
+                                        <span class="font-medium"><?php echo $_SESSION['successmessage'];
+                                                                    unset($_SESSION['successmessage']);
+                                                                    ?></span>
+                                    </div>
+                                </div>
+                            <?php endif ?>
                             <div class="grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+
                                 <div class="sm:col-span-3">
                                     <label for="first-name" class="block text-sm font-medium leading-6 text-gray-900">Name</label>
                                     <div class="mt-2">

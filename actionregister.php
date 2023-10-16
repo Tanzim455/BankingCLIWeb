@@ -6,12 +6,6 @@ use App\Web\Database;
 session_start();
 require_once './vendor/autoload.php';
 
-
-
-
-
-
-
 //         # code...
 if (isset($_POST['add_record'])) {
     $columns = ['name', 'email', 'password'];

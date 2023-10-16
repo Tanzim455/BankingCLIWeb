@@ -39,5 +39,7 @@ if (isset($_POST['add_record'])) {
 
         $database = new Database();
         $stmt = $database->insert(array: $columns, tableName: "users", password: $hashed_password);
+        $_SESSION['successmessage'] = "Registration successfully done";
+        header('location: adminaddcustomers.php');
     }
 }
